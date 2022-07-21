@@ -1,4 +1,6 @@
-import {Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt} from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany } from 'sequelize-typescript';
+import Role from './role.model';
+import UserHasRoles from './user_has_roles.model';
 
 export interface UserInterface {
     id?: number | null;
@@ -47,6 +49,9 @@ export default class User extends Model implements UserInterface {
     @NotEmpty
     @Column
     password!: string;
+
+    @BelongsToMany(() => Role, () => UserHasRoles)
+    roles!: Role[];
 
     @CreatedAt
     created_at!: Date;
