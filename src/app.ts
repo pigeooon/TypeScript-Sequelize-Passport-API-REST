@@ -3,6 +3,8 @@ import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 
+import sequelize from './database';
+
 const app = express();
 
 //settings
@@ -23,9 +25,12 @@ app.get('/', (request:any, response:any) => {
     );
 });
 
-//listen server
-app.listen(app.get('port'), () => {
-    console.log(`[Vigili-APP] Servidor encendido en el puerto ${app.get('port')} 👍!`);
-});
+(async () => {
+    await sequelize.sync({force: false});
+  
+    app.listen(app.get('port'), () => {
+        console.log(`[Vigili-APP] Servidor encendido en el puerto ${app.get('port')} 👍!`);
+    });
+})();
 
-export default app;
+export default app; 
