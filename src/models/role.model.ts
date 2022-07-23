@@ -1,4 +1,6 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany } from 'sequelize-typescript';
+import Permission from './permission.model';
+import RoleHasPermissions from './role_has_permission.model';
 import User from './user.model';
 import UserHasRoles from './user_has_roles.model';
 
@@ -28,6 +30,9 @@ export default class Role extends Model implements RoleInterface {
 
     @BelongsToMany(() => User, () => UserHasRoles)
     users!: User[];
+
+    @HasMany(() => RoleHasPermissions)
+    permissions!: RoleHasPermissions[];
 
     @CreatedAt
     created_at!: Date;
