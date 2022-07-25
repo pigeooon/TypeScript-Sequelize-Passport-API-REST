@@ -1,4 +1,5 @@
-import { AllowNull, AutoIncrement, Column, CreatedAt, DeletedAt, Model, NotEmpty, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, Column, CreatedAt, DeletedAt, HasMany, Model, NotEmpty, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import RoleHasPermissions from "./role_has_permission.model";
 
 export interface PermissionInterface {
     id?: number | null;
@@ -19,6 +20,9 @@ export default class Permission extends Model implements PermissionInterface {
     @Column
     permission!: string;
 
+    @HasMany(() => RoleHasPermissions, 'permission_id')
+    permissions_resources_roles!: RoleHasPermissions[];
+
     @CreatedAt
     created_at!: Date;
 
@@ -28,10 +32,3 @@ export default class Permission extends Model implements PermissionInterface {
     @DeletedAt
     deleted_at!: Date;
 }
-
-/*
-Create
-Read
-Write (Insert/Update)
-Delete
-*/

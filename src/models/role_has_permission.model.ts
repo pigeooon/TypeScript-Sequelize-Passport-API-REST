@@ -1,12 +1,12 @@
-import { Column, CreatedAt, DeletedAt, ForeignKey, Model, Table, UpdatedAt } from "sequelize-typescript";
+import { AutoIncrement, Column, CreatedAt, DeletedAt, ForeignKey, Model, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
 import Permission from "./permission.model";
 import Resource from "./resource.model";
 import Role from "./role.model";
 
 export interface RoleHasPermissionsInterface {
-    role_fk: number;
-    resource_fk: number;
-    permission_fk: number;
+    role_id: number;
+    resource_id: number;
+    permission_id: number;
 }
 
 @Table({
@@ -14,17 +14,22 @@ export interface RoleHasPermissionsInterface {
     timestamps: true,
 })
 export default class RoleHasPermissions extends Model implements RoleHasPermissionsInterface {
+    @PrimaryKey
+    @AutoIncrement
+    @Column
+    id?: number;
+
     @ForeignKey(() => Role)
     @Column
-    role_fk!: number;
+    role_id!: number;
 
     @ForeignKey(() => Resource)
     @Column
-    resource_fk!: number;
+    resource_id!: number;
 
     @ForeignKey(() => Permission)
     @Column
-    permission_fk!: number;
+    permission_id!: number;
 
     @CreatedAt
     created_at!: Date;

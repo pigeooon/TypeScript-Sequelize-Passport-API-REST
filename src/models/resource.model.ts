@@ -1,4 +1,5 @@
-import { AllowNull, AutoIncrement, Column, CreatedAt, DeletedAt, Model, NotEmpty, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import { AllowNull, AutoIncrement, Column, CreatedAt, DeletedAt, HasMany, Model, NotEmpty, PrimaryKey, Table, UpdatedAt } from "sequelize-typescript";
+import RoleHasPermissions from "./role_has_permission.model";
 
 export interface ResourceInterface {
     id?: number | null;
@@ -18,6 +19,9 @@ export default class Resource extends Model implements ResourceInterface {
     @NotEmpty
     @Column
     module!: string;
+
+    @HasMany(() => RoleHasPermissions, 'resource_id')
+    resource_roles_permissions!: RoleHasPermissions[];
 
     @CreatedAt
     created_at!: Date;
