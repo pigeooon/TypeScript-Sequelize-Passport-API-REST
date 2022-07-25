@@ -3,8 +3,8 @@ import Role from "./role.model";
 import User from "./user.model";
 
 export interface UserHasRolesInterface {
-    user_fk: number;
-    role_fk: number;
+    user_id: number;
+    role_id: number;
 }
 
 @Table({
@@ -14,11 +14,11 @@ export interface UserHasRolesInterface {
 export default class UserHasRoles extends Model implements UserHasRolesInterface {
     @ForeignKey(() => User)
     @Column
-    user_fk!: number;
+    user_id!: number;
 
     @ForeignKey(() => Role)
     @Column
-    role_fk!: number;
+    role_id!: number;
 
     @CreatedAt
     created_at!: Date;
