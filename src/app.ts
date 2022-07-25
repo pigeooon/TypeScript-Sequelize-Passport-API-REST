@@ -4,6 +4,7 @@ import morgan from 'morgan';
 import helmet from 'helmet';
 
 import sequelize from './database';
+import { basicSeeder } from './seeders/basic.seeder';
 
 const app = express();
 
@@ -31,6 +32,8 @@ app.get('/', (request:any, response:any) => {
     app.listen(app.get('port'), () => {
         console.log(`[Vigili-APP] Servidor encendido en el puerto ${app.get('port')} 👍!`);
     });
+
+    //basicSeeder();
 })();
 
 export default app; 
