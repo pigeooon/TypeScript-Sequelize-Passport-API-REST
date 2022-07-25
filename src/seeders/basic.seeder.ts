@@ -17,7 +17,7 @@ export const basicSeeder = async () => {
     resourceRepository.create({ id: 3, module: 'material_mayor' });
 
     const roleRepository = sequelize.getRepository(Role);
-    roleRepository.create({ id: 1, name: 'Comandante', description: 'Comandante', priority: 930 });
+    roleRepository.create({ id: 1, name: 'Comandante', description: 'Comandante', priority: 930, super_admin: 1 });
     roleRepository.create({ id: 2, name: '2° Comandante', description: '2° Comandante', priority: 920 });
     roleRepository.create({ id: 3, name: '3° Comandante', description: '3° Comandante', priority: 910 });
     roleRepository.create({ id: 4, name: '4° Comandante', description: '4° Comandante', priority: 900 });
@@ -26,7 +26,7 @@ export const basicSeeder = async () => {
     roleRepository.create({ id: 7, name: 'Teniente 2°', description: 'Teniente 2°', priority: 710 });
     roleRepository.create({ id: 8, name: 'Teniente 3°', description: 'Teniente 3°', priority: 700 });
     roleRepository.create({ id: 9, name: 'Ayudante', description: 'Ayudante', priority: 600 });
-    roleRepository.create({ id: 10, name: 'Inspector de Informática', description: 'Inspector de Informática', priority: 0 });
+    roleRepository.create({ id: 10, name: 'Inspector de Informática', description: 'Inspector de Informática', priority: 0, super_admin: 1 });
 
     const userRepository = sequelize.getRepository(User);
     userRepository.create({ first_name: 'Monique', last_name: 'Jackson', rut: '100.100.1', email: 'monique.jackson@cbv.cl', password: '@123'});

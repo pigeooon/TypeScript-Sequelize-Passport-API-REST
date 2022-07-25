@@ -1,4 +1,4 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany, Default } from 'sequelize-typescript';
 import RoleHasPermissions from './role_has_permission.model';
 import User from './user.model';
 import UserHasRoles from './user_has_roles.model';
@@ -8,6 +8,7 @@ export interface RoleInterface {
     name: string;
     description: string;
     priority: number;
+    super_admin: number;
 }
 
 @Table({
@@ -30,6 +31,10 @@ export default class Role extends Model implements RoleInterface {
 
     @Column
     priority!: number;
+
+    @Default(0)
+    @Column
+    super_admin!: number;
 
     @BelongsToMany(() => User, () => UserHasRoles)
     users!: User[];
