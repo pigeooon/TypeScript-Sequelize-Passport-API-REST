@@ -7,6 +7,7 @@ export interface RoleInterface {
     id?: number;
     name: string;
     description: string;
+    priority: number;
 }
 
 @Table({
@@ -26,6 +27,9 @@ export default class Role extends Model implements RoleInterface {
     @AllowNull(true)
     @Column
     description!: string;
+
+    @Column
+    priority!: number;
 
     @BelongsToMany(() => User, () => UserHasRoles)
     users!: User[];
