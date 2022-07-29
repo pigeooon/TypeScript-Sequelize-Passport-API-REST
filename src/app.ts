@@ -5,6 +5,7 @@ import helmet from 'helmet';
 
 import sequelize from './database';
 import { basicSeeder } from './seeders/basic.seeder';
+import router from './routes';
 
 const app = express();
 
@@ -25,6 +26,8 @@ app.get('/', (request:any, response:any) => {
         author:'Giancarlo-Ferretto'}
     );
 });
+
+app.use('/', router);
 
 (async () => {
     await sequelize.sync({force: false});
