@@ -7,7 +7,7 @@ const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
   dialect: 'mysql',
   models: [__dirname + '/models'],
-  repositoryMode: true
+  repositoryMode: false
 });
 
 export default sequelize;
