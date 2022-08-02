@@ -1,4 +1,4 @@
-import { CreateUserInterface, UpdateUserInterface } from "../interfaces/user.interfaces";
+import { CreateUserInterface, UpdateUserInterface } from "../interfaces/user.interface";
 import Role from "../models/role.model";
 import User from "../models/user.model";
 

@@ -1,5 +1,5 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany } from 'sequelize-typescript';
-import { UserInterface } from '../interfaces/user.interfaces';
+import { UserInterface } from '../interfaces/user.interface';
 import Role from './role.model';
 import UserHasRoles from './user_has_roles.model';
 
