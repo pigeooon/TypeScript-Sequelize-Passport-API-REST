@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import { CreateUserInterface, UpdateUserInterface } from '../interfaces/user.interfaces';
-import User from '../models/user.model';
 import UserService from '../services/user.service';
 
 export default class UserController {
