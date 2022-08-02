@@ -1,18 +1,7 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany } from 'sequelize-typescript';
+import { UserInterface } from '../interfaces/user.interfaces';
 import Role from './role.model';
 import UserHasRoles from './user_has_roles.model';
-
-export interface UserInterface {
-    id?: number | null;
-    first_name: string;
-    last_name: string;
-    rut: string;
-    email: string;
-    password: string;
-    created_at: Date;
-    updated_at: Date;
-    deleted_at: Date;
-}
 
 @Table({
     timestamps: true,
