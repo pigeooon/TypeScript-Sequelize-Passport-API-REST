@@ -1,5 +1,6 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany } from 'sequelize-typescript';
 import { UserInterface } from '../interfaces/user.interface';
+import Post from './post';
 import Role from './role.model';
 import UserHasRoles from './user_has_roles.model';
 
@@ -41,6 +42,9 @@ export default class User extends Model implements UserInterface {
 
     @BelongsToMany(() => Role, () => UserHasRoles)
     roles!: Role[];
+
+    @HasMany(() => Post)
+    posts!: Post[];
 
     @CreatedAt
     created_at!: Date;
