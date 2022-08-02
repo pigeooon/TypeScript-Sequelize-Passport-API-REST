@@ -1,10 +1,12 @@
+// https://github.com/ljlm0402/typescript-express-starter/tree/master/lib/sequelize/src
+// https://www.coreycleary.me/what-is-the-difference-between-controllers-and-services-in-node-rest-apis/
+
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
 
 import sequelize from './database';
-import { basicSeeder } from './seeders/basic.seeder';
 import router from './routes';
 
 const app = express();
@@ -35,8 +37,6 @@ app.use('/', router);
     app.listen(app.get('port'), () => {
         console.log(`[Vigili-APP] Servidor encendido en el puerto ${app.get('port')} 👍!`);
     });
-
-    //basicSeeder();
 })();
 
 export default app; 
