@@ -8,3 +8,10 @@ export interface PostInterface {
     updated_at: Date;
     deleted_at: Date;
 }
+
+export interface CreatePostInterface {
+    title: string;
+    content: string;
+    status: number;
+    author_id: number;
+}
