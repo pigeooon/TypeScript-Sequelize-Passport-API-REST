@@ -1,12 +1,25 @@
 import { CreatePostInterface } from "../interfaces/post.interface";
 import User from "../models/user.model";
 import Post from "../models/post.model";
+import Role from "../models/role.model";
 
 export default class PostService {
 
     public static async getPosts() {
         return new Promise((resolve, reject) => {
-            Post.findAll({ include: [User] }).then((results:any) => {
+            Post.findAll(
+            { 
+                include: 
+                { 
+                    model: User, 
+                    attributes: ['id', 'first_name', 'last_name'],
+                    include: 
+                    [{
+                        model: Role,
+                        attributes: ['name']
+                    }]
+                }
+            }).then((results:any) => {
                 if(results === null) {
                     reject({ http_code: 404, reason: 'Posts not found.' });
                 }
@@ -24,7 +37,23 @@ export default class PostService {
                 reject({ http_code: 400, reason: 'Invalid request params.'});
             }
             else {
-                Post.findOne({ where: { id: postId }, include: [User] }).then((results:any) => {
+                Post.findOne(
+                { 
+                    where: 
+                    { 
+                        id: postId 
+                    },
+                    include: 
+                    { 
+                        model: User, 
+                        attributes: ['id', 'first_name', 'last_name'],
+                        include: 
+                        [{
+                            model: Role,
+                            attributes: ['name']
+                        }]
+                    }
+                }).then((results:any) => {
                     if(results === null) {
                         reject({ http_code: 404, reason: 'Post not found.' });
                     }
