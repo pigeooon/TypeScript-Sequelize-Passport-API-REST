@@ -1,5 +1,6 @@
 // https://github.com/ljlm0402/typescript-express-starter/tree/master/lib/sequelize/src
 // https://www.coreycleary.me/what-is-the-difference-between-controllers-and-services-in-node-rest-apis/
+// https://github.com/microsoft/TypeScript-Node-Starter/tree/master/src
 
 import express from 'express';
 import cors from 'cors';
