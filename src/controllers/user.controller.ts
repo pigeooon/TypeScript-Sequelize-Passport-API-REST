@@ -1,12 +1,9 @@
 import { Request, Response, NextFunction } from 'express';
-
 import passport from 'passport';
 import { IVerifyOptions } from 'passport-local';
-
 import * as jwt from "jsonwebtoken";
 import 'dotenv/config';
 import User from '../models/user.model';
-import UserHasRoles from '../models/user_has_roles.model';
 
 export default class UserController {
     constructor() { }
