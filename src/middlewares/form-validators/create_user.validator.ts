@@ -25,7 +25,7 @@ const checkConfirmPassword: CustomValidator = (value, { req }) => {
     return true;
 };
 
-export const createUserValidator = [
+export const createUserFormValidator = [
     body('first_name').notEmpty(),
     body('last_name').notEmpty(),
     body('rut').notEmpty().custom(checkIfRutExists),

@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { body, validationResult } from "express-validator";
 
-export const createPostValidator = [
+export const createPostFormValidator = [
     body('title').notEmpty(),
     body('content').notEmpty(),
     body('status').notEmpty().isNumeric(),

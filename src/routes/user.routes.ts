@@ -1,6 +1,6 @@
 import { Router } from "express";
 import UserController from "../controllers/user.controller";
-import { loginUserValidator } from "../middlewares/form-validators/login_user_validator";
+import { loginUserFormValidator } from "../middlewares/form-validators/login_user.validator";
 
 export default class UserRoutes {
     private path = '/users';
@@ -16,7 +16,7 @@ export default class UserRoutes {
     }
 
     private createRoutes() {
-        this.router.post(`${this.path}/login`, loginUserValidator, this.userController.signIn);
+        this.router.post(`${this.path}/login`, loginUserFormValidator, this.userController.signIn);
         
         this.router.post(`${this.path}/register`, this.userController.signUp);
     }

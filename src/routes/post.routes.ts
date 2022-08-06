@@ -1,6 +1,6 @@
 import { Router } from "express";
 import PostController from "../controllers/post.controller";
-import { createPostValidator } from "../middlewares/form-validators/create_post_validator";
+import { createPostFormValidator } from "../middlewares/form-validators/create_post.validator";
 import UserController from "../controllers/user.controller";
 
 export default class PostRoutes {
@@ -22,9 +22,9 @@ export default class PostRoutes {
 
         this.router.get(`${this.path}/:id(\\d+)`, this.userController.isAuthenticated, this.postController.getPostById);
 
-        this.router.post(`${this.path}`, this.userController.isAuthenticated, createPostValidator, this.postController.createPost);
+        this.router.post(`${this.path}`, this.userController.isAuthenticated, createPostFormValidator, this.postController.createPost);
 
-        this.router.put(`${this.path}/:id(\\d+)`, this.userController.isAuthenticated, createPostValidator, this.postController.updatePost);
+        this.router.put(`${this.path}/:id(\\d+)`, this.userController.isAuthenticated, createPostFormValidator, this.postController.updatePost);
 
         this.router.delete(`${this.path}/:id(\\d+)`, this.userController.isAuthenticated, this.postController.deletePost);
     }
