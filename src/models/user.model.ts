@@ -1,5 +1,6 @@
-import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany, BeforeCreate } from 'sequelize-typescript';
 import { UserInterface } from '../interfaces/user.interface';
+import { encryptPassword, comparePassword } from '../middlewares/passwordEncryptor';
 import Post from './post.model';
 import Role from './role.model';
 import UserHasRoles from './user_has_roles.model';
@@ -54,4 +55,14 @@ export default class User extends Model implements UserInterface {
 
     @DeletedAt
     deleted_at!: Date;
+
+    @BeforeCreate
+    static async encryptPassword(user: User) {
+        let encryptedPassword: any = await encryptPassword(user.password);
+        user.password = String(encryptedPassword);
+    }
+}
+
+export async function compareUserPassword(user: User, password: string): Promise<boolean | null> {
+    return comparePassword(user.password, password);
 }

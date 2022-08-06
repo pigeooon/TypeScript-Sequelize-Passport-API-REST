@@ -6,9 +6,11 @@ import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
 import helmet from 'helmet';
-
+import passport from 'passport';
+import session from 'express-session';
 import sequelize from './database';
 import router from './routes';
+import 'dotenv/config';
 
 const app = express();
 
@@ -21,6 +23,15 @@ app.use(helmet());
 app.use(morgan('dev'));
 app.use(express.json());
 app.use(express.urlencoded({extended: false}));
+
+app.use(session({
+    secret: String(process.env.API_SESSION_KEY),
+    resave: false,
+    saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+import "./middlewares/passport";
 
 //hello world
 app.get('/', (request:any, response:any) => {
@@ -36,7 +47,7 @@ app.use('/', router);
     await sequelize.sync({force: false});
   
     app.listen(app.get('port'), () => {
-        console.log(`[Vigili-APP] Servidor encendido en el puerto ${app.get('port')} 👍!`);
+        console.log(`[APP] Servidor encendido en el puerto ${app.get('port')} 👍!`);
     });
 })();
 

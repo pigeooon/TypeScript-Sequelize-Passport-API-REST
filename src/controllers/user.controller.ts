@@ -1,56 +1,43 @@
-import { Request, Response } from 'express';
-import { CreateUserInterface, UpdateUserInterface } from '../interfaces/user.interface';
-import UserService from '../services/user.service';
+import { Request, Response, NextFunction } from 'express';
+
+import passport from 'passport';
+import { IVerifyOptions } from 'passport-local';
+
+import * as jwt from "jsonwebtoken";
+import 'dotenv/config';
+import User from '../models/user.model';
+import UserHasRoles from '../models/user_has_roles.model';
 
 export default class UserController {
     constructor() { }
 
-    public getUsers(req: Request, res: Response): any {
-        UserService.getUsers().then((resp:any) => {
-            return res.status(resp.http_code).json(resp.results); 
-        }).catch((err:any) => {
-            return res.status(err.http_code).json(err.reason);
-        });
+    public signIn(req: Request, res: Response) {
+        passport.authenticate('local', (err: Error, user: User | null, info: IVerifyOptions) => {
+            if(err) {
+                return res.status(500).json({ message: 'Passport internal error.' });
+            }
+            if(!user) {
+                return res.status(401).json({ message: info.message });
+            }
+            const token = jwt.sign({ id: user.id }, String(process.env.API_SECRET_KEY), {
+                expiresIn: "8h"
+            });
+            return res.status(200).json({ accessToken: token });
+        })(req, res);
     }
 
-    public getUserById(req: Request, res: Response): any {
-        let userId: number = Number(req.params.id);
-
-        UserService.getUserById(userId).then((resp:any) => {
-            return res.status(resp.http_code).json(resp.results); 
-        }).catch((err:any) => {
-            return res.status(err.http_code).json(err.reason);
-        });
+    public isAuthenticated(req: Request, res: Response, next: NextFunction) {
+        passport.authenticate('jwt', (err: Error, user: User | null, info: IVerifyOptions) => {
+            if(err) {
+                return res.status(500).json({ message: 'Passport internal error.' });
+            }
+            if(!user) {
+                return res.status(401).json({ message: 'Invalid token.' });
+            }
+            return next();
+        })(req, res, next);
     }
 
-    public createUser(req: Request, res: Response): any {
-        let userBody: CreateUserInterface = req.body;
-
-        UserService.createUser(userBody).then((resp:any) => {
-            return res.status(resp.http_code).json(resp.results); 
-        }).catch((err:any) => {
-            return res.status(err.http_code).json(err.reason);
-        });
-    }
-
-    public updateUser(req: Request, res: Response): any {
-        let userId: number = Number(req.params.id);
-        let user: UpdateUserInterface = req.body;
-
-        UserService.updateUser(userId, user).then((resp:any) => {
-            return res.status(resp.http_code).json(resp.results); 
-        }).catch((err:any) => {
-            return res.status(err.http_code).json(err.reason);
-        });
-    }
-
-    public deleteUser(req: Request, res: Response): any {
-        let userId: number = Number(req.params.id);
-
-        UserService.deleteUser(userId).then((resp:any) => {
-            return res.status(resp.http_code).json(resp.results); 
-        }).catch((err:any) => {
-            return res.status(err.http_code).json(err.reason);
-        });
+    public signUp() {
     }
 }
