@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { CreatePostInterface } from '../interfaces/post.interface';
+import { CreatePostType } from '../types/post.type';
 import PostService from '../services/post.service';
 
 export default class PostController {
@@ -24,7 +24,7 @@ export default class PostController {
     }
 
     public createPost(req: Request, res: Response): any {
-        let postBody: CreatePostInterface = req.body;
+        let postBody: CreatePostType = req.body;
 
         PostService.createPost(postBody).then((resp:any) => {
             return res.status(resp.http_code).json(resp.results); 
@@ -35,7 +35,7 @@ export default class PostController {
 
     public updatePost(req: Request, res: Response): any {
         let postId: number = Number(req.params.id);
-        let post: CreatePostInterface = req.body;
+        let post: CreatePostType = req.body;
 
         PostService.updatePost(postId, post).then((resp:any) => {
             return res.status(resp.http_code).json(resp.results); 

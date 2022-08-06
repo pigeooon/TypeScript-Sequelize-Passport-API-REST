@@ -1,4 +1,4 @@
-import { CreatePostInterface } from "../interfaces/post.interface";
+import { CreatePostType } from "../types/post.type";
 import User from "../models/user.model";
 import Post from "../models/post.model";
 import Role from "../models/role.model";
@@ -66,7 +66,7 @@ export default class PostService {
         }); 
     }
 
-    public static async createPost(postBody: CreatePostInterface) {
+    public static async createPost(postBody: CreatePostType) {
         return new Promise((resolve, reject) => {
             Post.create(
             { 
@@ -84,7 +84,7 @@ export default class PostService {
         }); 
     }
 
-    public static async updatePost(postId: any, postBody: CreatePostInterface) {
+    public static async updatePost(postId: any, postBody: CreatePostType) {
         return new Promise((resolve, reject) => {
             if(isNaN(postId)) {
                 reject({ http_code: 400, reason: 'Invalid request params.'});

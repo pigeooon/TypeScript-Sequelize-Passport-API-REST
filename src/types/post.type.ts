@@ -1,4 +1,4 @@
-export interface PostInterface { 
+export type PostType = { 
     id?: number | null;
     title: string;
     content: string;
@@ -9,7 +9,7 @@ export interface PostInterface {
     deleted_at: Date;
 }
 
-export interface CreatePostInterface {
+export type CreatePostType = {
     title: string;
     content: string;
     status: number;

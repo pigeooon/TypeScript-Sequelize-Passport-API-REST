@@ -1,5 +1,5 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, Unique, CreatedAt, UpdatedAt, DeletedAt, BelongsToMany, HasMany, BeforeCreate } from 'sequelize-typescript';
-import { UserInterface } from '../interfaces/user.interface';
+import { UserType } from '../types/user.type';
 import { encryptPassword, comparePassword } from '../middlewares/passwordEncryptor';
 import Post from './post.model';
 import Role from './role.model';
@@ -8,7 +8,7 @@ import UserHasRoles from './user_has_roles.model';
 @Table({
     timestamps: true,
 })
-export default class User extends Model implements UserInterface {
+export default class User extends Model implements UserType {
     @PrimaryKey
     @AutoIncrement
     @Column

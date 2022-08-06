@@ -1,11 +1,11 @@
 import { Table, Column, Model, PrimaryKey, AutoIncrement, AllowNull, NotEmpty, CreatedAt, UpdatedAt, DeletedAt, Default, HasOne, ForeignKey, BelongsTo } from 'sequelize-typescript';
-import { PostInterface } from '../interfaces/post.interface';
+import { PostType } from '../types/post.type';
 import User from './user.model';
 
 @Table({
     timestamps: true,
 })
-export default class Post extends Model implements PostInterface {
+export default class Post extends Model implements PostType {
     @PrimaryKey
     @AutoIncrement
     @Column
