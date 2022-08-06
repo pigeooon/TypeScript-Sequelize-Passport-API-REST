@@ -1,2 +1,2 @@
-# Vigili-API
-Vigili API (proyecto) - sistema de gestión de personal bomberil.
+# Typescript API REST
+Este repositorio contiene un proyecto de API REST con login, registro, roles y permisos, desarrollado en TypeScript, Express, Sequelize ORM y Passport.
