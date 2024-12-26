@@ -75,7 +75,6 @@ export const basicSeeder = async () => {
     userRepository.create({ first_name: 'Jeffrey', last_name: 'Osborne', rut: '100.100.44', email: 'jeffrey.osborne@cbv.cl', password: '@123'});
     userRepository.create({ first_name: 'Pam', last_name: 'Stevens', rut: '100.100.45', email: 'pam.stevens@cbv.cl', password: '@123'});
     userRepository.create({ first_name: 'Kevin', last_name: 'Chavez', rut: '100.100.46', email: 'kevin.chavez@cbv.cl', password: '@123'});
-    userRepository.create({ first_name: 'Giancarlo', last_name: 'Ferretto', rut: '20.688.415-0', email: 'giancarlo.ferretto@cbv.cl', password: '@123'});
     userRepository.create({ first_name: 'Matthew', last_name: 'Smith', rut: '100.100.48', email: 'matthew.smith@cbv.cl', password: '@123'});
     userRepository.create({ first_name: 'Matthew', last_name: 'Coleman', rut: '100.100.49', email: 'matthew.coleman@cbv.cl', password: '@123'});
     userRepository.create({ first_name: 'Michael', last_name: 'Johnson', rut: '100.100.50', email: 'michael.johnson@cbv.cl', password: '@123'});
